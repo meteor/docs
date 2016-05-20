@@ -35,16 +35,16 @@ On the client, you must pass `password` and at least one of `username` or
 later. If there are existing users with a username or email only differing in
 case, `createUser` will fail. On the server, you do not need to specify
 `password`, but the user will not be able to log in until it has a password (eg,
-set with [`Accounts.setPassword`](#accounts_setpassword)).
+set with [`Accounts.setPassword`](#Accounts-setPassword)).
 
 To create an account without a password on the server and still let the
 user pick their own password, call `createUser` with the `email` option
 and then
-call [`Accounts.sendEnrollmentEmail`](#accounts_sendenrollmentemail). This
+call [`Accounts.sendEnrollmentEmail`](#Accounts-sendEnrollmentEmail). This
 will send the user an email with a link to set their initial password.
 
 By default the `profile` option is added directly to the new user document. To
-override this behavior, use [`Accounts.onCreateUser`](#accounts_oncreateuser).
+override this behavior, use [`Accounts.onCreateUser`](#Accounts-onCreateUser).
 
 This function is only used for creating users with passwords. The external
 service login flows do not use this function.
@@ -80,7 +80,7 @@ or the client.
 {% apibox "Accounts.forgotPassword" %}
 
 This triggers a call
-to [`Accounts.sendResetPasswordEmail`](#accounts_sendresetpasswordemail)
+to [`Accounts.sendResetPasswordEmail`](#Accounts-sendResetPasswordEmail)
 on the server. When the user visits the link in this email, the callback
 registered with [`Accounts.onResetPasswordLink`](#Accounts-onResetPasswordLink)
 will be called.
@@ -103,7 +103,7 @@ When the user visits the link in this email, the callback registered with
 [`AccountsClient#onResetPasswordLink`](#Accounts-onResetPasswordLink) will be called.
 
 To customize the contents of the email, see
-[`Accounts.emailTemplates`](#accounts_emailtemplates).
+[`Accounts.emailTemplates`](#Accounts-emailTemplates).
 
 {% apibox "Accounts.sendEnrollmentEmail" %}
 
@@ -111,7 +111,7 @@ When the user visits the link in this email, the callback registered with
 [`Accounts.onEnrollmentLink`](#Accounts-onEnrollmentLink) will be called.
 
 To customize the contents of the email, see
-[`Accounts.emailTemplates`](#accounts_emailtemplates).
+[`Accounts.emailTemplates`](#Accounts-emailTemplates).
 
 {% apibox "Accounts.sendVerificationEmail" %}
 
@@ -120,7 +120,7 @@ When the user visits the link in this email, the callback registered with
 be called.
 
 To customize the contents of the email, see
-[`Accounts.emailTemplates`](#accounts_emailtemplates).
+[`Accounts.emailTemplates`](#Accounts-emailTemplates).
 
 
 {% apibox "Accounts.onResetPasswordLink" %}
