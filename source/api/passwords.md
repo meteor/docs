@@ -154,7 +154,9 @@ Example:
 
 ```js
 Accounts.emailTemplates.siteName = "AwesomeSite";
-Accounts.emailTemplates.from = "AwesomeSite Admin <accounts@example.com>";
+Accounts.emailTemplates.from = function () {
+    return "AwesomeSite Admin <accounts@example.com>";
+};
 Accounts.emailTemplates.enrollAccount.subject = function (user) {
     return "Welcome to Awesome Town, " + user.profile.name;
 };
