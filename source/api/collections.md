@@ -810,7 +810,7 @@ Sorts may be specified using your choice of several syntaxes:
 Users.find({}, {sort: {createdAt: -1}})
 
 // Sorted by createdAt descending and by name ascending
-Users.find({}, {sort: {createdAt: 'desc', name: 'asc'}})
+Users.find({}, {sort: [ ["createdAt", "desc"], ["name", "asc"] ] })
 
 ```
 
