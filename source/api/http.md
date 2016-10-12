@@ -25,10 +25,12 @@ methods, as the method can succeed or fail based on the results of the
 synchronous HTTP call.  In this case, consider using
 [`this.unblock()`](#method_unblock) to allow other methods on the same
 connection to run in
-the mean time.  On the client, this function must be used
-asynchronously by passing a callback.
+the mean time.  
 
-If you use the same code on the server and the client, be aware that on the client your browser might issue an `OPTION`-call before your `POST`, `GET`, etc. call as per standard protocol to figure out Cross Origin Resource Sharing (CORS) settings.
+On the client, this function must be used asynchronously by passing a 
+callback. Note that some browsers first send an `OPTIONS` request before 
+sending your request (in order to [determine CORS headers]
+(http://stackoverflow.com/a/21783145/627729)).
 
 Both HTTP and HTTPS protocols are supported.  The `url` argument must be
 an absolute URL including protocol and host name on the server, but may be
