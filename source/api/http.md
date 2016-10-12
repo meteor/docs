@@ -28,6 +28,8 @@ connection to run in
 the mean time.  On the client, this function must be used
 asynchronously by passing a callback.
 
+If you use the same code on the server and the client, be aware that on the client your browser might issue an `OPTION`-call before your `POST`, `GET`, etc. call as per standard protocol to figure out Cross Origin Resource Sharing (CORS) settings.
+
 Both HTTP and HTTPS protocols are supported.  The `url` argument must be
 an absolute URL including protocol and host name on the server, but may be
 relative to the current host on the client.  The `query` option
