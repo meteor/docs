@@ -3,13 +3,14 @@ title: Methods
 description: Documentation of Meteor's Method (Remote Procedure Call) API.
 ---
 
-Methods are remote functions that Meteor clients can invoke.
+Meteor clients can remotely call Meteor Methods defined in your.  Use Meteor.call() on the client to call these Methods remotely.  Use Meteor Methods for your secure code to handle private or payment data.
 
 {% apibox "Meteor.methods" %}
 
 Example:
 
 ```js
+// Server side code
 Meteor.methods({
   foo: function (arg1, arg2) {
     check(arg1, String);
@@ -29,6 +30,13 @@ Meteor.methods({
     return "baz";
   }
 });
+
+// Client side code
+Meteor.call('foo', 1, 2);  // Runs asynchronously
+Meteor.call('foo', 1, 2, function(error, result) {
+  console.log(error);  // throw new Meteor.Error() to have it automatically show up here.
+  console.log(result);   // "some return value"
+}
 ```
 
 Calling `methods` on the server defines functions that can be called remotely by
