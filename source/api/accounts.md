@@ -229,6 +229,10 @@ ServiceConfiguration.configurations.upsert(
   }
 );
 ```
+> Here are the different id properties to use :
+- Facebook : **appId**
+- Github, Google, Meetup, Meteor developer accounts, Weibo : **clientId**
+- twitter : **consumerKey**
 
 Each external service has its own login provider package and login function. For
 example, to support GitHub login, run in your terminal:
