@@ -383,13 +383,13 @@ Additional parameters can be passed in the same way as the `npm` command
 full list of commands and for a better understanding of their usage.
 
 For example, executing `meteor npm install lodash --save` would install `lodash`
-from npm, to your `node_modules` directory and save its usage in your
+from npm to your `node_modules` directory and save its usage in your
 [`package.json`](https://docs.npmjs.com/files/package.json) file.
 
 Using the `meteor npm ...` commands in place of traditional `npm ...` commands
-is particularly important when using Node.js modules which have binary
-dependencies which make native C calls (like [`bcrypt`](https://www.npmjs.com/package/bcrypt))
-by ensuring that they are built using the same libaries.
+is particularly important when using Node.js modules that have binary
+dependencies that make native C calls (like [`bcrypt`](https://www.npmjs.com/package/bcrypt))
+because doing so ensures that they are built using the same libaries.
 
 Additionally, this access to the npm that comes with Meteor avoids the need to
 download and install npm separately.
@@ -397,13 +397,13 @@ download and install npm separately.
 <h2 id="meteornode">meteor node</h2>
 
 The `meteor node` command calls the
-[`node`](https://nodejs.org) command bundled with Meteor itself.
+[`node`](https://nodejs.org) version bundled with Meteor itself.
 
-> This is not to be confused with [`meteor shell`](#meteorshell) which provides
+> This is not to be confused with [`meteor shell`](#meteorshell), which provides
 an almost identical experience but also gives you access to the "server" context
 of a Meteor application.  Typically, `meteor shell` will be preferred.
 
-Additional parameters can be passed in the same way as the `node` command and
+Additional parameters can be passed in the same way as the `node` command, and
 the [Node.js documentation](https://nodejs.org/dist/latest-v4.x/docs/api/cli.html)
 should be consulted for the full list of commands and for a better understanding
 of their usage.
