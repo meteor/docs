@@ -95,7 +95,7 @@ Example:
       rendered differently. }}
 
   {{#each posts}}
-    {{> postItem }}
+    {{> postItem}}
   {{/each}}
 </template>
 
