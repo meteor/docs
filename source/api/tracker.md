@@ -115,14 +115,14 @@ and returns `func`'s own return value.  If `func` accesses reactive data
 sources, these data sources will never cause a rerun of the enclosing
 computation.
 
-{% apibox "Tracker.inFlush" %}
-
-This value indicates, wether a flush is in progress or not.
-
 {% apibox "Tracker.active" %}
 
 This value is useful for data source implementations to determine
 whether they are being accessed reactively or not.
+
+{% apibox "Tracker.inFlush" %}
+
+This value indicates, wether a flush is in progress or not.
 
 {% apibox "Tracker.currentComputation" %}
 
