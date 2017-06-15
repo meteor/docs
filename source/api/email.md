@@ -17,7 +17,7 @@ environment variable should be of the form
 The `smtps://` form should be used if the mail server uses TLS/SSL, as many
 mail providers do (the `s` is for "secure", and common for port 465).
 Note that secure connections to port 587 typically start unencrypted and therefore
-should use `smtp://`
+should use `smtp://`. For more information see the [Nodemailer docs](https://nodemailer.com/smtp/)
 
 If `MAIL_URL` is not set, `Email.send` outputs the message to standard output
 instead.
