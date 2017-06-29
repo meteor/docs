@@ -36,8 +36,14 @@ same as `meteor run`.
 To pass additional options to Node.js use the `NODE_OPTIONS` environment variable.
 For example: `NODE_OPTIONS='--debug'` or `NODE_OPTIONS='--debug-brk'`
 
-Run `meteor help run` to see the full list of options.
+To specify a port to listen on (instead of the default 3000), use `--port [PORT]`.
+(The development server also uses port `N+1` for the default MongoDB instance)
 
+For example: `meteor run --port 4000` 
+will run the development server on `http://localhost:4000`
+and the development MongoDB instance on `mongodb://localhost:4001`.
+
+Run `meteor help run` to see the full list of options.
 
 <h2 id="meteordebug">meteor debug</h2>
 
@@ -57,6 +63,8 @@ specify a different port use the `--debug-port <port>` option.
 The same debugging functionality can be achieved by adding the `--debug-port <port>`
 option to other `meteor` tool commands, such as `meteor run` and `meteor test-packages`.
 
+> **Note:** Due to a [bug in `node-inspector`](https://github.com/node-inspector/node-inspector/issues/903), pushing "Enter" after a command on the Node Inspector Console will not successfully send the command to the server.  If you require this functionality, please consider using Safari or `meteor shell` in order to interact with the server console until the `node-inspector` project [fixes the bug](https://github.com/node-inspector/node-inspector/pull/955).  Alternatively, there is a hot-patch available [in this comment](https://github.com/meteor/meteor/issues/7991#issuecomment-266709459) on [#7991](https://github.com/meteor/meteor/issues/7991).
+
 
 <h2 id="meteorcreate">meteor create <i>name</i></h2>
 
@@ -67,6 +75,11 @@ path.
 You can use the `--package` option, to create a new package. If used in an
 existing app, this command will create a package in the packages
 directory.
+
+You can use `meteor create --bare` to scaffold a basic, empty project or
+`meteor create --full` for a more complete, imports-based project which
+closely matches the structure recommended by the
+[Meteor Guide](https://guide.meteor.com/).
 
 <h2 id="meteorloginlogout">meteor login / logout</h2>
 
@@ -366,21 +379,44 @@ commands can be accessed by pressing the up arrow.
 
 <h2 id="meteornpm">meteor npm</h2>
 
-Calling `meteor npm` calls the `npm` command bundled with meteor.
+The `meteor npm` command calls the
+[`npm`](https://docs.npmjs.com/getting-started/what-is-npm) version bundled
+with Meteor itself.
 
-Pass additional arguments as you would to `npm`.
+Additional parameters can be passed in the same way as the `npm` command
+(e.g. `meteor npm rebuild`, `meteor npm ls`, etc.) and the
+[npm documentation](https://docs.npmjs.com/) should be consulted for the
+full list of commands and for a better understanding of their usage.
 
-For example, executing `meteor npm install bootstrap` would install bootstrap
-from npm, to your `node_modules` dir.
+For example, executing `meteor npm install lodash --save` would install `lodash`
+from npm to your `node_modules` directory and save its usage in your
+[`package.json`](https://docs.npmjs.com/files/package.json) file.
 
-This is useful for ensuring that you install dependencies with npm v3,
-as expected by meteor since [v1.3.4](https://github.com/meteor/meteor/blob/devel/History.md#v134)
+Using the `meteor npm ...` commands in place of traditional `npm ...` commands
+is particularly important when using Node.js modules that have binary
+dependencies that make native C calls (like [`bcrypt`](https://www.npmjs.com/package/bcrypt))
+because doing so ensures that they are built using the same libaries.
+
+Additionally, this access to the npm that comes with Meteor avoids the need to
+download and install npm separately.
 
 <h2 id="meteornode">meteor node</h2>
 
-Calling `meteor node` calls the `node` command bundled with meteor.
+The `meteor node` command calls the
+[`node`](https://nodejs.org) version bundled with Meteor itself.
 
-Pass additional arguments as you would to `node`.
+> This is not to be confused with [`meteor shell`](#meteorshell), which provides
+an almost identical experience but also gives you access to the "server" context
+of a Meteor application.  Typically, `meteor shell` will be preferred.
 
-For example, executing `meteor node -e "console.log(process.versions)"` would
+Additional parameters can be passed in the same way as the `node` command, and
+the [Node.js documentation](https://nodejs.org/dist/latest-v4.x/docs/api/cli.html)
+should be consulted for the full list of commands and for a better understanding
+of their usage.
+
+For example, executing `meteor node` will enter the Node.js
+[Read-Eval-Print-Loop (REPL)](https://nodejs.org/dist/latest-v4.x/docs/api/repl.html)
+interface and allow you to interactively run JavaScript and see the results.
+
+Executing `meteor node -e "console.log(process.versions)"` would
 run `console.log(process.versions)` in the version of `node` bundled with Meteor.

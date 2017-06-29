@@ -11,9 +11,15 @@ meteor add email
 ```
 
 The server reads from the `MAIL_URL` environment variable to determine how to
-send mail. Currently, Meteor supports sending mail over SMTP; the `MAIL_URL`
-environment variable should be of the form
-`smtp://USERNAME:PASSWORD@HOST:PORT`.
+send mail. The `MAIL_URL` should reference an
+[SMTP](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol) server and
+use the form `smtp://USERNAME:PASSWORD@HOST:PORT` or
+`smtps://USERNAME:PASSWORD@HOST:PORT`.  The `smtps://` form (the `s` is for
+"secure") should be used if the mail server requires TLS/SSL (and does not use
+`STARTTLS`) and is most common on port 465.  Connections which start unencrypted
+prior to being upgraded to TLS/SSL (using `STARTTLS`) typically use port 587
+(and _sometimes_ 25) and should use `smtp://`.  For more information see the
+[Nodemailer docs](https://nodemailer.com/smtp/)
 
 If `MAIL_URL` is not set, `Email.send` outputs the message to standard output
 instead.
@@ -30,28 +36,26 @@ client could send, to prevent your server from being used as a relay
 by spammers.)
 
 ```js
-// In your server code: define a method that the client can call
+// Server: Define a method that the client can call.
 Meteor.methods({
-  sendEmail: function (to, from, subject, text) {
+  sendEmail(to, from, subject, text) {
+    // Make sure that all arguments are strings.
     check([to, from, subject, text], [String]);
 
-    // Let other method calls from the same client start running,
-    // without waiting for the email sending to complete.
+    // Let other method calls from the same client start running, without
+    // waiting for the email sending to complete.
     this.unblock();
 
-    Email.send({
-      to: to,
-      from: from,
-      subject: subject,
-      text: text
-    });
+    Email.send({ to, from, subject, text });
   }
 });
 
-// In your client code: asynchronously send an email
-Meteor.call('sendEmail',
-            'alice@example.com',
-            'bob@example.com',
-            'Hello from Meteor!',
-            'This is a test of Email.send.');
+// Client: Asynchronously send an email.
+Meteor.call(
+  'sendEmail',
+  'Alice <alice@example.com>',
+  'bob@example.com',
+  'Hello from Meteor!',
+  'This is a test of Email.send.'
+);
 ```

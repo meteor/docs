@@ -10,12 +10,16 @@ author:
 language:
 timezone:
 apis:
+  gtm: GTM-MBQ369M
   marketo: 627-RVJ-941
   segment: zQx6cQifkTU79E3L0XAnmrOXP2A5bC6r
   docsearch:
     apiKey: bdf6b09d12024f6bae3631a0dfdd4a7f
     indexName: meteor_api_guide
 versions:
+  - '1.5'
+  - '1.4.4'
+  - '1.4.3'
   - '1.4.2'
   - '1.4.1'
   - '1.4.0'
@@ -51,7 +55,9 @@ sidebar_categories:
     - api/mobile-config
   Packages:
     - packages/appcache
+    - packages/apollo
     - packages/accounts-ui
+    - packages/bundle-visualizer
     - packages/audit-argument-checks
     - packages/coffeescript
     - packages/ecmascript
@@ -66,6 +72,7 @@ sidebar_categories:
     - packages/webapp
   Command Line:
     - commandline
+    - environment-variables
 github_repo: 'meteor/docs'
 content_root: 'source'
 

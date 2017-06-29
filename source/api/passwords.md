@@ -19,6 +19,8 @@ To add password support to your application, run this command in your terminal:
 meteor add accounts-password
 ```
 
+> In addition to configuring the [`email`](email.html) package's `MAIL_URL`, it is critical that you set proper values (specifically the `from` address) in [`Accounts.emailTemplates`](#Accounts-emailTemplates) to ensure proper delivery of e-mails!
+
 You can construct your own user interface using the
 functions below, or use the [`accounts-ui` package](#accountsui) to
 include a turn-key user interface for password-based sign-in.
@@ -125,12 +127,12 @@ This is an `Object` with several fields that are used to generate text/html
 for the emails sent by `sendResetPasswordEmail`, `sendEnrollmentEmail`,
 and `sendVerificationEmail`.
 
-Override fields of the object by assigning to them:
+Set the fields of the object by assigning to them:
 
-- `from`: A `String` with an [RFC5322](http://tools.ietf.org/html/rfc5322) From
-   address. By default, the email is sent from `no-reply@meteor.com`. If you
-   wish to receive email from users asking for help with their account, be sure
-   to set this to an email address that you can receive email at.
+- `from`: (**required**) A `String` with an [RFC5322](http://tools.ietf.org/html/rfc5322) From
+   address. By default, the email is sent from `no-reply@example.com`. **If you
+   want e-mails to send correctly, this should be changed to your own domain
+   as most e-mail providers will reject mail sent from `example.com`.**
 - `siteName`: The public name of your application. Defaults to the DNS name of
    the application (eg: `awesome.meteor.com`).
 - `headers`: An `Object` for custom email headers as described in
@@ -152,18 +154,30 @@ Override fields of the object by assigning to them:
 Example:
 
 ```js
-Accounts.emailTemplates.siteName = "AwesomeSite";
-Accounts.emailTemplates.from = "AwesomeSite Admin <accounts@example.com>";
-Accounts.emailTemplates.enrollAccount.subject = function (user) {
-    return "Welcome to Awesome Town, " + user.profile.name;
+Accounts.emailTemplates.siteName = 'AwesomeSite';
+Accounts.emailTemplates.from = 'AwesomeSite Admin <accounts@example.com>';
+
+Accounts.emailTemplates.enrollAccount.subject = (user) => {
+  return `Welcome to Awesome Town, ${user.profile.name}`;
 };
-Accounts.emailTemplates.enrollAccount.text = function (user, url) {
-   return "You have been selected to participate in building a better future!"
-     + " To activate your account, simply click the link below:\n\n"
-     + url;
+
+Accounts.emailTemplates.enrollAccount.text = (user, url) => {
+  return 'You have been selected to participate in building a better future!'
+    + ' To activate your account, simply click the link below:\n\n'
+    + url;
 };
-Accounts.emailTemplates.resetPassword.from = function () {
-   // Overrides value set in Accounts.emailTemplates.from when resetting passwords
-   return "AwesomeSite Password Reset <no-reply@example.com>";
+
+Accounts.emailTemplates.resetPassword.from = () => {
+  // Overrides the value set in `Accounts.emailTemplates.from` when resetting
+  // passwords.
+  return 'AwesomeSite Password Reset <no-reply@example.com>';
+};
+Accounts.emailTemplates.verifyEmail = {
+   subject() {
+      return "Activate your account now!";
+   },
+   text(user, url) {
+      return `Hey ${user}! Verify your e-mail by following this link: ${url}`;
+   }
 };
 ```
