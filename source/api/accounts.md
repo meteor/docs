@@ -215,27 +215,31 @@ First, add the service configuration package:
 meteor add service-configuration
 ```
 
-Then, in your app:
+Then, in your app (this example is for the Weebo service):
 
 ```js
 ServiceConfiguration.configurations.upsert(
   { service: "weibo" },
   {
     $set: {
-      clientId: "1292962797",
       loginStyle: "popup",
+      clientId: "1292962797", // See table below for correct property name!
       secret: "75a730b58f5691de5522789070c319bc"
     }
   }
 );
 ```
-> Here are the different id properties to use :
-- Facebook : **appId**
-- Github, Google, Meetup, Meteor developer accounts, Weibo : **clientId**
-- Twitter : **consumerKey**
 
-Each external service has its own login provider package and login function. For
-example, to support GitHub login, run in your terminal:
+The correct property name to use for the API identifier (i.e. `clientId` in the above example) depends on the the login service being used, so be sure to use the correct one:
+
+| Property Name | Services |
+|---|---|
+| `appId` | Facebook |
+| `clientId` | Github, Google, Meetup, Meteor Developer Accounts, Weibo |
+| `consumerKey` | Twitter |
+
+Additionally, each external service has its own login provider package and login function. For
+example, to support GitHub login, run the following in your terminal:
 
 ```bash
 meteor add accounts-github
