@@ -46,7 +46,7 @@ Meteor.methods({
     // waiting for the email sending to complete.
     this.unblock();
 
-    Email.send({ to, from, subject, text });
+    Email.send({ 'to': to, 'from': from, 'subject': subject, 'text': text });
   }
 });
 
