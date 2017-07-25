@@ -65,7 +65,7 @@ Npm.depends({
 `api.mainModule` is documented in the [modules](http://docs.meteor.com/packages/modules.html#Modular-package-structure) section.
 
 Build plugins are created with
-[`Package.registerBuildPlugin`](#Package-registerBuildPlugin). See the
+[`Package.registerBuildPlugin`](#PackageNamespace-registerBuildPlugin). See the
 coffeescript package for an example. Build plugins are fully-fledged Meteor
 programs in their own right and have their own namespace, package dependencies,
 source files and npm requirements.
