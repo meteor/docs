@@ -17,6 +17,7 @@ apis:
     apiKey: 85d8a989beb6790642e6edd6ea380788
     indexName: meteor
 versions:
+  - '1.5.1'
   - '1.5'
   - '1.4.4'
   - '1.4.3'
