@@ -136,7 +136,8 @@ Set the fields of the object by assigning to them:
 - `siteName`: The public name of your application. Defaults to the DNS name of
    the application (eg: `awesome.meteor.com`).
 - `headers`: An `Object` for custom email headers as described in
-    [`Email.send`](#email_send).
+    [`Email.send`](#email_send), or a `Function` that takes a user
+    object, a url, and type of email string, and returns an `Object`.
 - `resetPassword`: An `Object` with the fields:
  - `from`: A `Function` used to override the `from` address defined
    by the `emailTemplates.from` field.
