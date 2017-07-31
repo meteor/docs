@@ -212,7 +212,7 @@ Note that the `import` is `from 'meteor/my-modular-package'`, not `from 'my-modu
 
 Finally, since this package is using the new `modules` package, and the package `Npm.depends` on the "moment" npm package, modules within the package can `import moment from 'moment'` on both the client and the server. This is great news, because previous versions of Meteor allowed npm imports only on the server, via `Npm.require`.
 
-### Lazy loading Modules from a package
+### Lazy loading modules from a package
 
 Packages can also specify a *lazy* main module:
 
@@ -226,13 +226,14 @@ This means the `client.js` module will not be evaluated during app
 startup unless/until another module imports it, and will not even be
 included in the client bundle if no importing code is found.
 
-Note that packages with lazy main modules cannot use `api.export` to export global
-symbols to other packages/apps.
+To import a method named `exportedPackageMethod`, simply:
 
-Packages with lazy main modules should be restricted to Meteor 1.4.2.2 or later via
-`api.versionsFrom("1.4.2.2")`, since older versions of Meteor cannot
-import lazy main modules using `import "meteor/<package name>"` but must
-explicitly name the module: `import "meteor/<package name>/client.js"`.
+```js
+import { exportedPackageMethod } from "meteor/<package name>";
+```
+
+> Note: Packages with `lazy` main modules cannot use `api.export` to export global
+symbols to other packages/apps.  Also, prior to Meteor 1.4.4.2 it is neccessary to explicitly name the file containing the module: `import "meteor/<package name>/client.js"`.
 
 
 ## Local `node_modules`
