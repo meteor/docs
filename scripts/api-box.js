@@ -22,12 +22,20 @@ var DocsData = require(dataPath);
 hexo.extend.tag.register('apibox', function(args) {
   var name = args.shift();
   var options = parseTagOptions(args)
+
+  var dataFromApi = apiData({ name: name });
+
+  if (! dataFromApi) {
+    throw new Error("Cannot render apibox without API data: " + name);
+    return;
+  }
+
   var defaults = {
     // by default, nest if it's a instance method
     nested: name.indexOf('#') !== -1,
     instanceDelimiter: '#'
   };
-  var data = _.extend({}, defaults, options, apiData({ name: name }));
+  var data = _.extend({}, defaults, options, dataFromApi);
 
   data.id = data.longname.replace(/[.#]/g, "-");
 
@@ -118,11 +126,19 @@ signature = function (data, options) {
     // In general, if we are looking at an instance method, we want to show it as
     //   Something#foo or #foo (if short). However, when it's on something called
     //   `this`, we'll do the slightly weird thing of showing `this.foo` in both cases.
-    if (data.scope === "instance" && apiData(data.memberof).instancename === 'this') {
-      escapedLongname = "<em>this</em>." + data.name;
-    } else if (data.scope === "instance" && options.short) {
-      // Something#foo => #foo
-      return '<em>' + options.instanceDelimiter + '</em>' + escapedLongname.split('#')[1];
+    if (data.scope === "instance") {
+      // the class this method belongs to.
+      var memberOfData = apiData(data.memberof) || apiData(`${data.memberof}#${data.memberof}`);
+
+      // Certain instances are provided to the user in scope with a specific name
+      // TBH I'm not sure what else we use instanceName for (why we are setting for
+      // e.g. `reactiveVar` if we don't want to show it here) but we opt into showing it
+      if (memberOfData.showinstancename) {
+        escapedLongname = "<em>" + memberOfData.instancename + "</em>." + data.name;
+      } else if (options.short) {
+        // Something#foo => #foo
+        return '<em>' + options.instanceDelimiter + '</em>' + escapedLongname.split('#')[1];
+      }
     }
 
     // If the user passes in a instanceDelimiter and we are a static method,
