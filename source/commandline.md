@@ -43,6 +43,15 @@ For example: `meteor run --port 4000`
 will run the development server on `http://localhost:4000`
 and the development MongoDB instance on `mongodb://localhost:4001`.
 
+Environment Variables.
+- The `PORT` environment variable has no effect on the `meteor run` command.
+- If set the `ROOT_URL` environment variable will override the default URL of `http://localhost:3000`
+and will override any port set with the `--port [PORT]` option.  Using the `ROOT_URL` environment variable
+is the only way to set a URL that is not `localhost` with the `meteor run` command.
+
+For testing purposes it can sometimes be useful and simple to deploy with the `meteor run` command with an external facing url set
+by the `ROOT_URL` environment variable.  But this is definitely not recommended for production. Use the `meteor build` command to create a "vanilla" node deployment that you will deploy to production.
+
 Run `meteor help run` to see the full list of options.
 
 <h2 id="meteordebug">meteor debug</h2>
