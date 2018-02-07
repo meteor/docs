@@ -27,8 +27,6 @@ Meteor is a full-stack JavaScript platform for developing modern web and mobile 
 
 5. [Atmosphere](https://atmospherejs.com) is the repository of community packages designed especially for Meteor.
 
-6. [Awesome Meteor](https://github.com/Urigo/awesome-meteor) is a community-curated list of [packages](https://github.com/Urigo/awesome-meteor#getting-started) and [resources](https://github.com/Urigo/awesome-meteor#resources).
-
 
 {% oldRedirects %}
 
