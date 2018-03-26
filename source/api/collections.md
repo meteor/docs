@@ -178,7 +178,7 @@ Read more about collections and how to use them in the [Collections](http://guid
 documents.  Cursors provide `fetch` to return all matching documents, `map` and
 `forEach` to iterate over all matching documents, and `observe` and
 `observeChanges` to register callbacks when the set of matching documents
-changes.
+changes. Cursors also implement ES2015's [iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
 
 {% pullquote warning %}
 Collection cursors are not query snapshots.  If the database changes
@@ -391,6 +391,15 @@ Meteor.startup(() => {
 
 {% apibox "Mongo.Collection#allow" %}
 
+{% pullquote warning %}
+While `allow` and `deny` make it easy to get started building an app, it's
+harder than it seems to write secure `allow` and `deny` rules. We recommend
+that developers avoid `allow` and `deny`, and switch directly to custom methods
+once they are ready to remove `insecure` mode from their app.  See
+[the Meteor Guide on security](https://guide.meteor.com/security.html#allow-deny)
+for more details.
+{% endpullquote %}
+
 When a client calls `insert`, `update`, or `remove` on a collection, the
 collection's `allow` and [`deny`](#deny) callbacks are called
 on the server to determine if the write should be allowed. If at least
@@ -525,6 +534,15 @@ meteor remove insecure
 
 {% apibox "Mongo.Collection#deny" %}
 
+{% pullquote warning %}
+While `allow` and `deny` make it easy to get started building an app, it's
+harder than it seems to write secure `allow` and `deny` rules. We recommend
+that developers avoid `allow` and `deny`, and switch directly to custom methods
+once they are ready to remove `insecure` mode from their app.  See
+[the Meteor Guide on security](https://guide.meteor.com/security.html#allow-deny)
+for more details.
+{% endpullquote %}
+
 This works just like [`allow`](#allow), except it lets you
 make sure that certain writes are definitely denied, even if there is an
 `allow` rule that says that they should be permitted.
@@ -542,7 +560,7 @@ if no `deny` rules return `true` and at least one `allow` rule returns
 <h2 id="mongo_cursor">Cursors</h2>
 
 To create a cursor, use [`find`](#find).  To access the documents in a
-cursor, use [`forEach`](#foreach), [`map`](#map), or [`fetch`](#fetch).
+cursor, use [`forEach`](#foreach), [`map`](#map), [`fetch`](#fetch), or ES2015's [iteration protocols](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
 
 {% apibox "Mongo.Cursor#forEach" %}
 
