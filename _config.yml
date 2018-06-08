@@ -58,6 +58,7 @@ sidebar_categories:
     - packages/modules
     - packages/oauth-encryption
     - packages/random
+    - packages/server-render
     - packages/spacebars
     - packages/underscore
     - packages/webapp
