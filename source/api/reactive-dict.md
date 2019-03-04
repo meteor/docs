@@ -10,7 +10,7 @@ invalidate any Computations that called `get` with that key, according to the
 usual contract for reactive data sources.
 
 That means if you call [`ReactiveDict#get`](#ReactiveDict-get)`('currentList')`
-from inside a template, the template will automatically be rerendered
+from inside a Blaze template helper, the template will automatically be rerendered
 whenever [`ReactiveDict#set`](#ReactiveDict-set)`('currentList', x)` is called.
 
 To use `ReactiveDict`, add the `reactive-dict` package to your project by running
@@ -31,15 +31,15 @@ Example:
 
 ```js
 const state = new ReactiveDict();
-state.set({ 'currentRoomId': 'list' })
+state.set('currentRoomId', 'random')
 
 Tracker.autorun(() => {
   Meteor.subscribe('chatHistory', { room: state.get('currentRoomId') });
 });
 
 // Causes the function passed to `Tracker.autorun` to be rerun, so that the
-// 'chatHistory' subscription is moved to the room 'home'.
-state.set('currentRoomId', 'home');
+// 'chatHistory' subscription is moved to the room 'general'.
+state.set('currentRoomId', 'general');
 ```
 
 `ReactiveDict.set` can also be called with an object of keys and values, which is
@@ -102,7 +102,7 @@ state.get('key') === value
 state.equals('key', value)
 ```
 
-...but the second one is always better. It triggers fewer invalidations
+However, the second is recommended, as it triggers fewer invalidations
 (template redraws), making your program more efficient.
 
 {% apibox "ReactiveDict#all" %}
