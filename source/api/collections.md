@@ -555,7 +555,7 @@ if no `deny` rules return `true` and at least one `allow` rule returns
 
 {% apibox "Mongo.Collection#rawCollection" %}
 
-The methods (like `update` or `insert`) you call on the resulting _raw_ collection are promise-based, and will not execute serially like a regular collection on the server.
+The methods (like `update` or `insert`) you call on the resulting _raw_ collection return promises and can be used outside of a Fiber.
 
 {% apibox "Mongo.Collection#rawDatabase" %}
 
