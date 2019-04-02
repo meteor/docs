@@ -555,6 +555,8 @@ if no `deny` rules return `true` and at least one `allow` rule returns
 
 {% apibox "Mongo.Collection#rawCollection" %}
 
+The methods (like `update` or `insert`) you call on the resulting _raw_ collection are promise-based, and will not execute serially like a regular collection on the server.
+
 {% apibox "Mongo.Collection#rawDatabase" %}
 
 <h2 id="mongo_cursor">Cursors</h2>
