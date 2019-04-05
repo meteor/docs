@@ -269,9 +269,9 @@ domain and callback URL that you configure with the external service (for
 instance, if you are running Meteor behind a proxy server, `$ROOT_URL` should be
 the externally-accessible URL, not the URL inside your proxy).
 
-<h3 id="manual-settings-configuration">Manual configuring settings</h3>
+<h3 id="manual-settings-configuration">Manual settings configuration</h3>
 
-You can use key loginServiceConfiguration to edit settings collection, for example:
+You can use `Accounts.loginServiceConfiguration` to view and edit the settings collection:
 
 ```js
 Accounts.loginServiceConfiguration.find();
