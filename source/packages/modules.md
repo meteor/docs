@@ -158,8 +158,7 @@ As of CoffeeScript 1.11.0, [CoffeeScript supports `import` and `export` statemen
 CoffeeScript `import` syntax is nearly identical to the ES2015 syntax you see above:
 
 ```coffee
-import { Meteor } from 'meteor/meteor'
-import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import SimpleSchema from 'simpl-schema'
 import { Lists } from './lists.coffee'
 ```
 
