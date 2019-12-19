@@ -223,9 +223,11 @@ its fields can contain any combination of EJSON-compatible datatypes
 (arrays, objects, numbers, strings, `null`, true, and false).
 
 `insert` will generate a unique ID for the object you pass, insert it
-in the database, and return the ID. When `insert` is called from
-untrusted client code, it will be allowed only if passes any
-applicable [`allow`](#allow) and [`deny`](#deny) rules.
+in the database, and return the ID. The ID is passed to the callback method
+if there is one, otherwise it is returned directly from `insert`.
+
+When `insert` is called from untrusted client code, it will be allowed only 
+if it passes any applicable [`allow`](#allow) and [`deny`](#deny) rules.
 
 On the server, if you don't provide a callback, then `insert` blocks
 until the database acknowledges the write, or throws an exception if
@@ -329,6 +331,8 @@ a document if no documents were modified. `upsert` is the same as calling
 `update` with the `upsert` option set to true, except that the return
 value of `upsert` is an object that contain the keys `numberAffected`
 and `insertedId`. (`update` returns only the number of affected documents.)
+The returned object is passed to the callback if there is one, or returned directly
+if there is no callback.
 
 {% apibox "Mongo.Collection#remove" %}
 
