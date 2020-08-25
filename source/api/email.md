@@ -62,10 +62,10 @@ Meteor.call(
 
 {% apibox "Email.hookSend" %}
 
-`hookSend` is a convenient hook if you want to prevent sending certain emails
-or send them via your own integration instead of the default one provided by
-Meteor or want to do something else with the data. This is especially useful
-if you want to intercept emails send by core packages like accounts-password
+`hookSend` is a convenient hook if you want to: prevent sending certain emails, 
+send emails via your own integration instead of the default one provided by
+Meteor, or do something else with the data. This is especially useful
+if you want to intercept emails sent by core packages like accounts-password
 or other packages where you can't modify the email code.
 
 The hook function will receive an object with the options for Nodemailer.
