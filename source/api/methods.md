@@ -233,5 +233,19 @@ const loginRule = {
 // Add the rule, allowing up to 5 messages every 1000 milliseconds.
 DDPRateLimiter.addRule(loginRule, 5, 1000);
 ```
+
+Here's another example that rate-limits adding a custom `threads.create` method per-connection:
+```js
+// Define a rule that matches login attempts by non-admin users.
+const threadCreateRule = {
+  type: 'method',
+  name: 'threads.create',
+  connectionId() {
+    return true;
+  }
+};
+// Add the rule, allowing up to 5 messages per user connection (i.e., every connection is rate-limited separately) every 30 minutes.
+DDPRateLimiter.addRule(threadCreateRule, 5, 1000 * 60 * 30);
+```
 {% apibox "DDPRateLimiter.removeRule" nested:true instanceDelimiter:. %}
 {% apibox "DDPRateLimiter.setErrorMessage" nested:true instanceDelimiter:. %}
