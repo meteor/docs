@@ -23,3 +23,21 @@ Starting from MongoDB 4.4.4 we started to use Visual Studio 2019.
 Until MongoDB 4.2 [this](https://www.microsoft.com/en-us/download/confirmation.aspx?id=48145) was the usually the right version to be installed.
 
 After installing `vc_redist.x64` you should be able to run Meteor and MongoDB server without problems.
+
+<h2 id="unable-to-get-local-issuer-certificate">Unable to get local issuer certificate</h2>
+
+When installing Meteor via
+```shell
+npm install -g meteor --force
+```
+
+you encounter
+```shell
+Error: unable to get local issuer certificate
+```
+
+You can overcome this by setting:
+
+```shell
+export NODE_TLS_REJECT_UNAUTHORIZED=0
+```
