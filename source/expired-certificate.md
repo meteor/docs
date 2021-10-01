@@ -5,7 +5,7 @@ description: Troubleshooting Expired Certificates Issues
 
 Let's Encrypt Root Certificate expired on September 30th and this change is causing some issues. We explain the possible problems below and also how to solve them.
 
-This is not a Meteor or Galaxy issue.
+This is not an issue with Meteor or Galaxy, but a natural process if you are using Let's Encrypt's generated certificates.
 
 <h2 id="commands">Can't run Meteor commands</h2>
 
