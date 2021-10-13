@@ -1,6 +1,10 @@
 ---
 title: Install
 ---
+If you prefer to watch the video, click below.
+
+{% youtube zzRXT2T_lIo %}
+
 Meteor currently supports **OS X, Windows, and Linux**. Only 64-bit is supported.
 Apple M1 is only supported through Rosetta at this moment.
 
