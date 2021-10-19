@@ -1,3 +1,5 @@
+> This repository has been merged into Meteor main repository. You can find it [there](https://github.com/meteor/meteor/tree/devel/docs).
+
 ## Meteor API Documentation - http://docs.meteor.com
 
 This is a [hexo](https://hexo.io) static site used to generate the [Meteor API Docs](http://docs.meteor.com).
