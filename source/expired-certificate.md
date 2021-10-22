@@ -19,11 +19,13 @@ Older versions of Meteor, more specifically anything older than Meteor v1.9 ship
 
 If you are getting errors like Connection error (certificate has expired) when running Meteor commands it means that you are running a version of Meteor older than v1.9.
 
-In Meteor v1.3 and later you will be able to specify the `CAFILE` that Meteor uses on the CLI.
+In Meteor v1.3 and later you will be able to specify the environment variable `CAFILE` that Meteor uses on the CLI.
 
 ```
-CAFILE="/path/to/ISRG_Root_X1.pem"
+CAFILE="/etc/ssl/certs/ISRG_Root_X1.pem"
 ```
+
+You can have this certificate installed by installing the `ca-certificates` package for your distro.
 
 A similar environment variable is also available in NodeJS from v7.3.0 and later (https://nodejs.org/api/cli.html#cli_node_extra_ca_certs_file) give you are having any issues on that level.
                                                                                                                                                  
@@ -31,7 +33,7 @@ A similar environment variable is also available in NodeJS from v7.3.0 and later
 NODE_EXTRA_CA_CERTS="/path/to/ISRG_Root_X1.pem"
 ```
                                                                                                                                                  
-Another workaround, [not recommended by NodeJS](https://nodejs.org/api/cli.html#cli_node_tls_reject_unauthorized_value), is to run all the meteor commands with the following environment variable ***NODE_TLS_REJECT_UNAUTHORIZED***, for example in the deploy command:
+Another workaround, [not recommended by NodeJS](https://nodejs.org/api/cli.html#cli_node_tls_reject_unauthorized_value), is to run all the meteor commands with the following environment variable `NODE_TLS_REJECT_UNAUTHORIZED`, for example in the deploy command:
 
 ```bash
 NODE_TLS_REJECT_UNAUTHORIZED=0 meteor deploy
